@@ -1,5 +1,16 @@
-import { Card, Col } from "antd"
+import { Card, Col, Skeleton, Space, Typography } from "antd"
 import React from "react"
+import styled from "styled-components";
+
+const StyledCard = styled(Card)`
+  border-radius: 1rem;
+  background-color: #f0f2f5;
+  border: solid 1px rgba(0, 0, 0, 0.1);
+  padding: .5rem;
+  .ant-card-body {
+    padding: .5rem .5em 0 .5rem;
+  }
+`;
 
 export default function PokeCard({ name, url }) {
   const [ imgURL, setImgURL ] = React.useState('')
@@ -18,18 +29,39 @@ export default function PokeCard({ name, url }) {
 
   return (
     <Col span={8}>
-      <Card
+      <StyledCard
         hoverable
         cover={
-          <img
-            style={{ width: "100%" }}
-            alt="example"
-            src={imgURL}
-          />
+          imgURL ? (
+            <img
+              style={{
+                width: "100%",
+                border: `solid 1px rgba(0,0,0,.1)`,
+                borderRadius: ".5rem",
+                backgroundColor: "white",
+              }}
+              alt={name}
+              src={imgURL}
+            />
+          ) : (
+            <>
+              <Skeleton.Button
+                active
+                size={24}
+                shape='round'
+                block={false}
+              />
+              <br />
+              <br />
+              <Skeleton.Input active size={10} />
+            </>
+          )
         }
       >
-        {name}
-      </Card>
+        <Typography.Title level={5} ellipsis>
+          {name[0].toUpperCase() + name.slice(1)}
+        </Typography.Title>
+      </StyledCard>
     </Col>
-  )
+  );
 }

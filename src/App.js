@@ -1,8 +1,14 @@
 import React from "react";
-import { Layout, Row, Typography } from "antd";
+import { Divider, Layout, Row, Typography } from "antd";
 import PokeCard from "./components/poke-card";
 import ButtonGroup from "./components/button-group";
+import styled from "styled-components";
 // import "./styles.css";
+
+const StyledLayout = styled(Layout)`
+  padding: 2rem 24rem;
+  background-color: #e9e9ea;
+`;
 
 export default function App() {
   const [pokes, setPokes] = React.useState({});
@@ -25,15 +31,21 @@ export default function App() {
   }, [url]);
 
   return (
-    <Layout>
+    <StyledLayout>
       <Typography.Title>Pokedex</Typography.Title>
-      <Row>
+      <Row
+        gutter={[
+          { xs: 8, sm: 16, md: 24 },
+          { xs: 8, sm: 16, md: 24 },
+        ]}
+      >
         {pokes &&
           pokes?.data?.map((poke) => (
             <PokeCard key={`${poke.name + poke.url}`} {...poke} />
           ))}
       </Row>
+      <Divider />
       <ButtonGroup pokes={pokes} setURL={setURL} />
-    </Layout>
+    </StyledLayout>
   );
 }

@@ -3,10 +3,9 @@ import styled from "styled-components";
 
 
 const ButtonWrapper = styled.div`
-  padding: 1rem;
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export default function ButtonGroup({pokes, setURL}) {
