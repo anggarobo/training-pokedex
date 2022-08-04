@@ -44,22 +44,18 @@ export default function PokeCard({ name, url }) {
               src={imgURL}
             />
           ) : (
-            <>
-              <Skeleton.Button
-                active
-                size={24}
-                shape='round'
-                block={false}
-              />
-              <br />
-              <br />
-              <Skeleton.Input active size={10} />
-            </>
+            <img
+              style={{ width: "100%", height: 180, backgroundColor: "#e9e9ea", borderRadius: '.5rem' }}
+            />
           )
         }
       >
         <Typography.Title level={5} ellipsis>
-          {name[0].toUpperCase() + name.slice(1)}
+          {name ? (
+            name[0].toUpperCase() + name.slice(1)
+          ) : (
+            <Skeleton.Input active block />
+          )}
         </Typography.Title>
       </StyledCard>
     </Col>
