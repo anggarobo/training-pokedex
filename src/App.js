@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Layout, Row, Typography } from "antd";
+import PokeCard from "./components/poke-card";
+import ButtonGroup from "./components/button-group";
+// import "./styles.css";
 
-function App() {
+export default function App() {
+  const [pokes, setPokes] = React.useState({});
+  const [url, setURL] = React.useState("https://pokeapi.co/api/v2/pokemon/");
+
+  React.useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        setPokes({
+          nextURL: data?.next,
+          prevURL: data?.previous,
+          data: data?.results,
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    })();
+  }, [url]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Layout>
+      <Typography.Title>Pokedex</Typography.Title>
+      <Row>
+        {pokes &&
+          pokes?.data?.map((poke) => (
+            <PokeCard key={`${poke.name + poke.url}`} {...poke} />
+          ))}
+      </Row>
+      <ButtonGroup pokes={pokes} setURL={setURL} />
+    </Layout>
   );
 }
-
-export default App;
