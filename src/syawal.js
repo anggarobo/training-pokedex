@@ -1,6 +1,10 @@
 import { useEffect } from "react"
 
 export default function useIdulFitri() {
+
+
+
+
   useEffect(() => {
     if ( date === "1 syawal" ) {
       message(" 
@@ -10,4 +14,7 @@ export default function useIdulFitri() {
       ")
     }
   }, [date])
+
+
+
 }
