@@ -10,7 +10,7 @@ export default function useIdulFitri() {
       message(" 
         Selamat idul fitri
         Taqabbalallahu minna waminkum
-        Minal'aidzin walfa'idzin
+        Minal'aidin wal fa-izin
       ")
     }
   }, [date])
